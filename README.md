@@ -24,3 +24,6 @@ npm install
 ```
 $ sls deploy
 ```
+### Varibles and environment
+
+You can add more variables in secrets.json and declare them in serverless.yml file
