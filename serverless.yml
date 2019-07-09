@@ -15,21 +15,30 @@
 
 service: serverless-nodejs-app
 
+custom: # add these two lines
+  defaultStage: dev
+  secrets: ${file(secrets.json)} # reference the secrets.json file
+  envVars: ${file(secrets.json):${opt:stage, self:custom.defaultStage}}
+
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: ${opt:stage, self:custom.defaultStage} # make sure to change this to production
   region: eu-central-1
+  environment: # add environment property
+    KEY: ${self:custom.envVars.key}
+    # reference the KEY from the secrets.json file
+    ####### Here you can Add more enviroment varibles ########
 
 functions:
   app:
-    handler: app.server # reference the file and exported method
-    events: # events trigger lambda functions
-      - http: # this is an API Gateway HTTP event trigger
+    handler: app.server
+    events:
+      - http:
           path: /
           method: ANY
           cors: true
-      - http: # all routes get proxied to the Express router
+      - http:
           path: /{proxy+}
           method: ANY
           cors: true
