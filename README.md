@@ -12,12 +12,13 @@ Configure Serverless Framework with your AWS credentials
 
 ```
 $ sls config credentials --provider aws --key PUBLIC_KEY --secret SECRET_KEY
+```
 
 ### Install dependencies
 
 ```
 npm install
-
+```
 ### Deployment
 
 ```
