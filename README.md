@@ -22,7 +22,7 @@ npm install
 ### Deployment
 
 ```
-$ sls deploy
+$ sls deploy --stage dev
 ```
 ### Varibles and environment
 
